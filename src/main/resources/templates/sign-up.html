@@ -24,29 +24,35 @@
 </head>
 <body>
 <div class="container">
-    <h1>Kaydol</h1>
-    <form method="post" action="/sign-up" class="form-horizontal">
-        <div class="container mt-5">
-            <div class="row mt-3">
-                <label for="laborantId" class="col-md-2">Hastane Kimlik Numarası</label>
-                <input id="laborantId" class="col-md-3" type="text" th:field="${laborant.id}" required/>
-            </div>
-            <div class="row mt-5">
-                <label for="laborantName" class="col-md-2">Laborant Adı</label>
-                <input id="laborantName" class="col-md-3" type="text" th:field="${laborant.name}" required/>
-            </div>
-            <div class="row mt-5">
-                <label for="laborantSurname" class="col-md-2">Laborant Soyadı</label>
-                <input id="laborantSurname" class="col-md-3" type="text" th:field="${laborant.surname}" required/>
-            </div>
-            <div class="row mt-5">
-                <label for="password" class="col-md-2">Şifre</label>
-                <input id="password" class="col-md-3" type="password" th:field="${laborant.password}" required/>
-            </div>
-            <button type="submit" class="btn btn-success btn-md col-md-auto mt-5">Kaydol</button>
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-user">Kayıt Ol</i>
         </div>
-    </form>
-
+        <div class="card-block" style="padding: 24px;">
+            <form method="post" action="/sign-up" class="form-horizontal">
+                <fieldset>
+                    <div class="row mt-3">
+                        <label for="laborantId" class="col-md-2">Hastane Kimlik Numarası</label>
+                        <input id="laborantId" class="form-control" type="text" th:field="${laborant.id}" required/>
+                    </div>
+                    <div class="row mt-5">
+                        <label for="laborantName" class="col-md-2">Laborant Adı</label>
+                        <input id="laborantName" class="form-control" type="text" th:field="${laborant.name}" required/>
+                    </div>
+                    <div class="row mt-5">
+                        <label for="laborantSurname" class="col-md-2">Laborant Soyadı</label>
+                        <input id="laborantSurname" class="form-control" type="text" th:field="${laborant.surname}"
+                               required/>
+                    </div>
+                    <div class="row mt-5">
+                        <label for="password" class="col-md-2">Şifre</label>
+                        <input id="password" class="form-control" type="password" th:field="${laborant.password}" required/>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-md col-md-auto mt-5">Kaydol</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </div>
 
 </body>

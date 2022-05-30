@@ -1,30 +1,36 @@
-package com.example.laboratuvar_raporlama.domains;
+package com.example.laboratuvar_raporlama.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "laborant")
 public class Laborant {
     @Id @GeneratedValue
     private Long primaryKey;
-
     // Hastane Kimlik Numarası
     private String id;
     private String password;
     private String name;
 
+    private String is_admin = "0";
     private String surname;
-    @OneToMany(targetEntity = Report.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "laborant_report_fk", referencedColumnName = "primaryKey")
-    private List<Report> reportList;
+//    @OneToMany(targetEntity = Report.class, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "laborant_report_fk", referencedColumnName = "primaryKey")
+    @OneToMany(mappedBy = "laborant")
+    @JsonIgnore
+    private Set<Report> reports = new HashSet<>();
 
-    public Laborant(String id, String password, String name, String surname, List<Report> reportList) {
+    public Laborant(String id, String password, String name, String is_admin, String surname, Set<Report> reports) {
         this.id = id;
+        this.is_admin = is_admin;
         this.password = password;
         this.name = name;
         this.surname = surname;
-        this.reportList = reportList;
+        this.reports = reports;
     }
 
     public Laborant() {
@@ -37,6 +43,14 @@ public class Laborant {
 
     public void setId(String username) {
         this.id = username;
+    }
+
+    public String getIs_admin() {
+        return is_admin;
+    }
+
+    public void setIs_admin(String is_admin) {
+        this.is_admin = is_admin;
     }
 
     public String getName() {
@@ -55,12 +69,12 @@ public class Laborant {
         this.surname = surname;
     }
 
-    public List<Report> getReportList() {
-        return reportList;
+    public Set<Report> getReports() {
+        return reports;
     }
 
-    public void setReportList(List<Report> reportList) {
-        this.reportList = reportList;
+    public void setReports(Set<Report> reportList) {
+        this.reports = reportList;
     }
 
     public String getPassword() {

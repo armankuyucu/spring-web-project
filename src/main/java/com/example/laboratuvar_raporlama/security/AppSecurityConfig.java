@@ -29,17 +29,17 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/","/sign-up").permitAll() // (3)
+                .antMatchers("/sign-up").permitAll() // (3)
                 .anyRequest().authenticated() // (4)
                 .and()
-                .formLogin() // (5)
+                .formLogin().loginPage("/login") // (5)
 //                .loginPage("/login") // (5)
                 .permitAll()
                 .and()
                 .logout() // (6)
-                .permitAll()
-                .and()
-                .httpBasic(); // (7)
+                .permitAll();
+//                .and()
+//                .httpBasic(); // (7)
         httpSecurity.csrf().disable();
     }
 

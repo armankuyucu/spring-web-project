@@ -1,6 +1,6 @@
 package com.example.laboratuvar_raporlama.services;
 
-import com.example.laboratuvar_raporlama.domains.Laborant;
+import com.example.laboratuvar_raporlama.domain.Laborant;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -24,7 +24,7 @@
 </head>
 <body>
 <div class="container">
-    <form method="post" action="/add-report" class="form-horizontal">
+    <form method="post" action="/add-report" enctype="multipart/form-data" class="form-horizontal">
         <div class="container">
             <div class="row mt-4">
                 <label for="fileNumber" class="col-md-2">Dosya Numarası</label>
@@ -58,8 +58,7 @@
             </div>
             <div class="row mt-4">
                 <label for="picture" class="col-md-2">Resim</label>
-                <input id="picture" class="col-md-3" type="file" accept="image/png, image/jpeg"
-                       th:field="${report.picture}" required/>
+                <input id="picture" class="col-md-3" type="file" name="file" accept="image/png, image/jpeg" required/>
             </div>
 
             <button type="submit" class="btn btn-primary btn-sm col-md-auto mt-4">Rapor Ekle</button>

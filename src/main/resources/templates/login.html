@@ -8,20 +8,45 @@
 </head>
 <body>
 <div class="container">
-    <!--  Arastirmaci  -->
-    <form method="post" action="/login" class="form-horizontal">
-        <div class="container">
-            <div class="row mt-3">
-                <label for="arastirmaciAdi" class="col-md-2">Kullanıcı Adı</label>
-                <input id="arastirmaciAdi" class="col-md-3" type="text" th:field="${user.username}"/>
+    <div style="width:600px;margin-left: auto;margin-right: auto;margin-top:24px;padding: 24px;">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-user"></i> Lütfen Giriş Yapınız
             </div>
-            <div class="row mt-3">
-                <label for="arastirmaciSoyadi" class="col-md-2">Şifre</label>
-                <input id="arastirmaciSoyadi" class="col-md-3" type="text" th:field="${user.password}"/>
-                <button type="submit" class="btn btn-primary btn-sm col-md-auto ms-3">Yeni Kullanıcı</button>
+            <div class="card-block" style="padding: 24px;">
+                <form name="f" th:action="@{/login}" method="post">
+                    <fieldset>
+                        <!-- Spring Security error display -->
+                        <div th:if="${param.error}" class="alert alert-danger">
+                            Yanlış kimlik numarası veya şifre.
+                        </div>
+
+                        <div th:if="${param.logout}" class="alert alert-success">
+                            Çıkış yaptınız.
+                        </div>
+
+                        <!-- Login Controls -->
+                        <div class="form-group">
+                            <label for="id">Hastane Kimlik Numarası</label>
+                            <input type="text" class="form-control" id="id" name="username"
+                                   placeholder="Username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Şifre</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                   placeholder="Password">
+                        </div>
+
+                        <!-- Login Button -->
+                        <div class="form-actions" style="margin-top: 12px;">
+                            <button type="submit" class="btn btn-success">Giriş Yap</button>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
 </body>

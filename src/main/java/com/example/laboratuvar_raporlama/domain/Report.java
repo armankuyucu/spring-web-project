@@ -1,12 +1,8 @@
-package com.example.laboratuvar_raporlama.domains;
+package com.example.laboratuvar_raporlama.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-import java.sql.Blob;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -22,12 +18,15 @@ public class Report {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date date;
     @Lob
-    private byte[] picture;
-
+    @Column(columnDefinition="clob")
+    private String picture;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "laborant_id", referencedColumnName = "primaryKey")
+    private Laborant laborant;
     public Report(){
 
     }
-    public Report(Long fileNumber, String patientName, String patientSurname, Long trIdentityNumber, String title, String details, Date date, byte[] picture) {
+    public Report(Long fileNumber, String patientName, String patientSurname, Long trIdentityNumber, String title, String details, Date date, String picture) {
         this.fileNumber = fileNumber;
         this.patientName = patientName;
         this.patientSurname = patientSurname;
@@ -94,11 +93,15 @@ public class Report {
         this.date = date;
     }
 
-    public byte[] getPicture() {
+    public String getPicture() {
         return picture;
     }
 
-    public void setPicture(byte[] picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public void assignLaborant(Laborant laborant) {
+        this.laborant = laborant;
     }
 }
