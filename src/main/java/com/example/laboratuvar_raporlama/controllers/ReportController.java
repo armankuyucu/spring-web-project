@@ -47,7 +47,7 @@ public class ReportController {
             username = principal.toString();
         }
         Laborant laborant = laborantRepository.findById(username);
-//        report.assignLaborant(laborant);
+        report.assignLaborant(laborant);
         reportService.saveReportToDB(file, report);
         return "redirect:/";
     }
@@ -58,7 +58,7 @@ public class ReportController {
         if (report.isPresent())
             model.addAttribute("report", report.get());
         else
-            System.out.println("EMPTY!!!!!!!!!!!");
+            System.out.println("EMPTY!");
         return "/picture";
     }
 
@@ -85,15 +85,15 @@ public class ReportController {
     }
 
     @GetMapping("/update")
-    public String updateReportGet(@RequestParam("id") Long fileNumber, Model model){
+    public String updateReportGet(@RequestParam("id") Long fileNumber, Model model) {
         model.addAttribute("report", reportRepository.getById(fileNumber));
         return "/update";
     }
 
     @PostMapping("/update")
     public String updateReportPost(Report report, @RequestParam("indicator") String indicator,
-                                   @RequestParam("id") Long primaryKey){
-        if(indicator.equals("fileNumber")){
+                                   @RequestParam("id") Long primaryKey) {
+        if (indicator.equals("fileNumber")) {
             report.setPrimaryKey(reportRepository.getById(primaryKey).getPrimaryKey());
             report.setFileNumber(report.getFileNumber());
             report.setPatientName(reportRepository.getById(primaryKey).getPatientName());
@@ -103,10 +103,9 @@ public class ReportController {
             report.setDetails(reportRepository.getById(primaryKey).getDetails());
             report.setDate(reportRepository.getById(primaryKey).getDate());
             report.setPicture(reportRepository.getById(primaryKey).getPicture());
-//            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
+            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
             reportRepository.save(report);
-        }
-        else if(indicator.equals("patientName")){
+        } else if (indicator.equals("patientName")) {
             report.setPrimaryKey(reportRepository.getById(primaryKey).getPrimaryKey());
             report.setFileNumber(reportRepository.getById(primaryKey).getFileNumber());
             report.setPatientName(report.getPatientName());
@@ -116,10 +115,9 @@ public class ReportController {
             report.setDetails(reportRepository.getById(primaryKey).getDetails());
             report.setDate(reportRepository.getById(primaryKey).getDate());
             report.setPicture(reportRepository.getById(primaryKey).getPicture());
-//            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
+            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
             reportRepository.save(report);
-        }
-        else if(indicator.equals("patientSurname")){
+        } else if (indicator.equals("patientSurname")) {
             report.setPrimaryKey(reportRepository.getById(primaryKey).getPrimaryKey());
             report.setFileNumber(reportRepository.getById(primaryKey).getFileNumber());
             report.setPatientName(reportRepository.getById(primaryKey).getPatientName());
@@ -129,10 +127,9 @@ public class ReportController {
             report.setDetails(reportRepository.getById(primaryKey).getDetails());
             report.setDate(reportRepository.getById(primaryKey).getDate());
             report.setPicture(reportRepository.getById(primaryKey).getPicture());
-//            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
+            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
             reportRepository.save(report);
-        }
-        else if(indicator.equals("trIdentityNumber")){
+        } else if (indicator.equals("trIdentityNumber")) {
             report.setPrimaryKey(reportRepository.getById(primaryKey).getPrimaryKey());
             report.setFileNumber(reportRepository.getById(primaryKey).getFileNumber());
             report.setPatientName(reportRepository.getById(primaryKey).getPatientName());
@@ -142,10 +139,9 @@ public class ReportController {
             report.setDetails(reportRepository.getById(primaryKey).getDetails());
             report.setDate(reportRepository.getById(primaryKey).getDate());
             report.setPicture(reportRepository.getById(primaryKey).getPicture());
-//            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
+            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
             reportRepository.save(report);
-        }
-        else if(indicator.equals("title")){
+        } else if (indicator.equals("title")) {
             report.setPrimaryKey(reportRepository.getById(primaryKey).getPrimaryKey());
             report.setFileNumber(reportRepository.getById(primaryKey).getFileNumber());
             report.setPatientName(reportRepository.getById(primaryKey).getPatientName());
@@ -155,10 +151,9 @@ public class ReportController {
             report.setDetails(reportRepository.getById(primaryKey).getDetails());
             report.setDate(reportRepository.getById(primaryKey).getDate());
             report.setPicture(reportRepository.getById(primaryKey).getPicture());
-//            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
+            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
             reportRepository.save(report);
-        }
-        else if(indicator.equals("details")){
+        } else if (indicator.equals("details")) {
             report.setPrimaryKey(reportRepository.getById(primaryKey).getPrimaryKey());
             report.setFileNumber(reportRepository.getById(primaryKey).getFileNumber());
             report.setPatientName(reportRepository.getById(primaryKey).getPatientName());
@@ -168,10 +163,9 @@ public class ReportController {
             report.setDetails(report.getDetails());
             report.setDate(reportRepository.getById(primaryKey).getDate());
             report.setPicture(reportRepository.getById(primaryKey).getPicture());
-//            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
+            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
             reportRepository.save(report);
-        }
-        else if(indicator.equals("date")){
+        } else if (indicator.equals("date")) {
             report.setPrimaryKey(reportRepository.getById(primaryKey).getPrimaryKey());
             report.setFileNumber(reportRepository.getById(primaryKey).getFileNumber());
             report.setPatientName(reportRepository.getById(primaryKey).getPatientName());
@@ -181,13 +175,14 @@ public class ReportController {
             report.setDetails(reportRepository.getById(primaryKey).getDetails());
             report.setDate(report.getDate());
             report.setPicture(reportRepository.getById(primaryKey).getPicture());
-//            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
+            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
             reportRepository.save(report);
         }
         return "redirect:/";
     }
+
     @PostMapping("/update-picture")
-    public String updateReportPicture(Report report,@RequestParam("file") MultipartFile file,
+    public String updateReportPicture(Report report, @RequestParam("file") MultipartFile file,
                                       @RequestParam("id") Long primaryKey) throws IOException {
         report.setPrimaryKey(reportRepository.getById(primaryKey).getPrimaryKey());
         report.setFileNumber(reportRepository.getById(primaryKey).getFileNumber());
@@ -197,7 +192,7 @@ public class ReportController {
         report.setTitle(reportRepository.getById(primaryKey).getTitle());
         report.setDetails(reportRepository.getById(primaryKey).getDetails());
         report.setDate(reportRepository.getById(primaryKey).getDate());
-//            report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
+        report.setLaborant(reportRepository.getById(primaryKey).getLaborant());
         report.setPicture(Base64.getEncoder().encodeToString(file.getBytes()));
         reportRepository.save(report);
         return "redirect:/";

@@ -105,17 +105,17 @@ public class Report {
         this.picture = picture;
     }
 
-//    public Laborant getLaborant() {
-//        return laborant;
-//    }
-//
-//    public void setLaborant(Laborant laborant) {
-//        this.laborant = laborant;
-//    }
-//
-//    public void assignLaborant(Laborant laborant) {
-//        this.laborant = laborant;
-//    }
+    public Laborant getLaborant() {
+        return laborant;
+    }
+
+    public void setLaborant(Laborant laborant) {
+        this.laborant = laborant;
+    }
+
+    public void assignLaborant(Laborant laborant) {
+        this.laborant = laborant;
+    }
 
     public Long getPrimaryKey() {
         return primaryKey;
