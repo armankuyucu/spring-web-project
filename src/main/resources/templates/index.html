@@ -90,27 +90,21 @@
             <td th:text="${report.title}"></td>
             <td th:text="${report.details}"></td>
             <td th:text="${report.date}"></td>
-            <th scope="row"><a th:href="@{/picture/(picture_id=${report.fileNumber})}"><img alt="Rapor Resmi" th:src="*{'data:image/*;base64,'+{report.picture}}"
+            <th scope="row"><a th:href="@{/picture/(picture_id=${report.primaryKey})}"><img alt="Rapor Resmi" th:src="*{'data:image/*;base64,'+{report.picture}}"
                                      style="width: 100px;height: 100px;"></a></th>
-            <th scope="row"><a th:href="@{/update/(id=${report.fileNumber})}">Raporu Güncelle</a></th>
-            <th scope="row"><a th:href="@{/delete/(id=${report.fileNumber})}">Raporu Sil</a></th>
+            <th scope="row"><a th:href="@{/update/(id=${report.primaryKey})}" class="link-success">Raporu Güncelle</a></th>
+            <th scope="row"><a th:href="@{/delete/(id=${report.primaryKey})}" class="link-danger">Raporu Sil</a></th>
         </tr>
         </tbody>
     </table>
 </div>
 <script>
+    <!-- Delete default datatable search function  -->
     $(document).ready(function () {
         $('#reportTable').DataTable({
             "dom": '<"top"l>rt<"bottom"ip><"clear">',
         });
     });
-    // document.getElementById("deleteButton").onclick = function (){
-    //     alert("Clicked!");
-    // };
-    document.getElementById("deleteButton").onclick = function (){
-        alert("clicked");
-    };
-
 </script>
 </body>
 

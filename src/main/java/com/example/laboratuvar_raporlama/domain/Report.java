@@ -8,7 +8,8 @@ import java.util.Date;
 @Entity
 @Table(name = "report")
 public class Report {
-    @Id
+    @Id @GeneratedValue
+    private Long primaryKey;
     private Long fileNumber;
     private String patientName;
     private String patientSurname;
@@ -111,5 +112,13 @@ public class Report {
 
     public void assignLaborant(Laborant laborant) {
         this.laborant = laborant;
+    }
+
+    public Long getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(Long primaryKey) {
+        this.primaryKey = primaryKey;
     }
 }
