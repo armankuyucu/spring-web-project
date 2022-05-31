@@ -84,4 +84,12 @@ public class Laborant {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Long getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(Long primaryKey) {
+        this.primaryKey = primaryKey;
+    }
 }

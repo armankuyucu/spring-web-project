@@ -83,17 +83,13 @@ public class ReportController {
         }
         Laborant laborant = laborantRepository.findById(username);
 
-        Report report = reportRepository.getById(id);
         if (laborant.getIs_admin().equals("1")) {
             reportRepository.deleteById(id);
             model.addAttribute("result", "1");
             return "redirect:/";
         } else {
-            System.out.println("IS ADMIN: " + report.getLaborant().getIs_admin());
-            System.out.println("ID: " + report.getLaborant().getId());
-
             model.addAttribute("result", "0");
-            return "redirect:/";
+            return "not_authorized";
         }
     }
 }

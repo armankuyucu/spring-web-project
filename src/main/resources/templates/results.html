@@ -12,12 +12,18 @@
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-1 justify-content-center mb-md-0">
-                    <li><a href="/" class="nav-link px-4 mt-2 text-success" style="font-size: 18px;font-weight:bold;">Ana Sayfa</a></li>
-                    <li><a href="/add-report" class="nav-link px-4 mt-2 text-success" style="font-size: 18px;font-weight:bold;">Rapor Ekle</a></li>
+                    <li><a href="/" class="nav-link px-4 mt-2 text-success" style="font-size: 18px;font-weight:bold;">Ana
+                        Sayfa</a></li>
+                    <li><a href="/add-report" class="nav-link px-4 mt-2 text-success"
+                           style="font-size: 18px;font-weight:bold;">Rapor Ekle</a></li>
                 </ul>
                 <div class="text-end">
-                    <button type="button" class="btn btn-success mx-4" onclick="window.location.href='/sign-up';">Kayıt Ol</button>
-                    <button type="button" class="btn btn-danger me-4" onclick="window.location.href='/logout';">Çıkış Yap</button>
+                    <button type="button" class="btn btn-success mx-4" onclick="window.location.href='/sign-up';">Kayıt
+                        Ol
+                    </button>
+                    <button type="button" class="btn btn-danger me-4" onclick="window.location.href='/logout';">Çıkış
+                        Yap
+                    </button>
                 </div>
             </div>
         </div>
@@ -49,38 +55,21 @@
         </tr>
         </thead>
         <tbody>
-        <div th:switch="${indicator}">
-            <div th:case="'1'">
-                <tr th:each="report : ${laborant.reports}">
-                    <td th:text="${report.laborant.name}"></td>
-                    <td th:text="${report.laborant.surname}"></td>
-                    <td th:text="${report.fileNumber}"></td>
-                    <td th:text="${report.patientName}"></td>
-                    <td th:text="${report.patientSurname}"></td>
-                    <td th:text="${report.trIdentityNumber}"></td>
-                    <td th:text="${report.title}"></td>
-                    <td th:text="${report.details}"></td>
-                    <td th:text="${report.date}"></td>
-                    <th scope="row"><a th:href="@{/picture/(picture_id=${report.fileNumber})}"><img alt="Rapor Resmi" th:src="*{'data:image/*;base64,'+{report.picture}}"
-                                                                                                    style="width: 100px;height: 100px;"></a></th>
-                </tr>
-            </div>
-            <div th:case="'0'">
-                <tr th:each="report : ${reports}">
-                    <td th:text="${report.laborant.name}"></td>
-                    <td th:text="${report.laborant.surname}"></td>
-                    <td th:text="${report.fileNumber}"></td>
-                    <td th:text="${report.patientName}"></td>
-                    <td th:text="${report.patientSurname}"></td>
-                    <td th:text="${report.trIdentityNumber}"></td>
-                    <td th:text="${report.title}"></td>
-                    <td th:text="${report.details}"></td>
-                    <td th:text="${report.date}"></td>
-                    <th scope="row"><a th:href="@{/picture/(picture_id=${report.fileNumber})}"><img alt="Rapor Resmi" th:src="*{'data:image/*;base64,'+{report.picture}}"
-                                                                                                    style="width: 100px;height: 100px;"></a></th>
-                </tr>
-            </div>
-        </div>
+        <tr th:each="report : ${reports}">
+            <td th:text="${report.laborant.name}"></td>
+            <td th:text="${report.laborant.surname}"></td>
+            <td th:text="${report.fileNumber}"></td>
+            <td th:text="${report.patientName}"></td>
+            <td th:text="${report.patientSurname}"></td>
+            <td th:text="${report.trIdentityNumber}"></td>
+            <td th:text="${report.title}"></td>
+            <td th:text="${report.details}"></td>
+            <td th:text="${report.date}"></td>
+            <th scope="row"><a th:href="@{/picture/(picture_id=${report.fileNumber})}"><img alt="Rapor Resmi"
+                                                                                            th:src="*{'data:image/*;base64,'+{report.picture}}"
+                                                                                            style="width: 100px;height: 100px;"></a>
+            </th>
+        </tr>
         </tbody>
     </table>
 </div>

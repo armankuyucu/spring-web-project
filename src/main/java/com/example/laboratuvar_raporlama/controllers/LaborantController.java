@@ -47,24 +47,20 @@ public class LaborantController {
             case "Hasta Soyadı":
                 model.addAttribute("indicator", "0");
                 model.addAttribute("laborants", laborantRepository.findAll());
-                model.addAttribute("reports", reportRepository.findAllByPatientSurnameStartingWith(searchDto.getInputValue()));
+                model.addAttribute("reports", reportRepository.findAllByPatientSurnameStartingWithIgnoreCase(searchDto.getInputValue()));
                 break;
             case "Hasta Kimlik Numarası":
                 model.addAttribute("indicator", "0");
                 model.addAttribute("laborants", laborantRepository.findAll());
-                model.addAttribute("reports", reportRepository.findAllByTrIdentityNumberStartingWith(Long.parseLong(searchDto.getInputValue())));
+                model.addAttribute("reports", reportRepository.findByTrIdentityNumber(Long.parseLong(searchDto.getInputValue())));
                 break;
             case "Laborant Adı":
                 model.addAttribute("indicator", "1");
-                model.addAttribute("laborant", laborantRepository.findAllByNameStartingWith(searchDto.getInputValue()));
-//                model.addAttribute("laborant",laborantRepository.findAllByNameStartingWith(searchDto.getInputValue()));
-
-//                model.addAttribute("reports",laborantRepository.findAllByNameStartingWith(searchDto.getInputValue()));
+                model.addAttribute("reports", reportRepository.findAllByLaborant_NameStartingWithIgnoreCase(searchDto.getInputValue()));
                 break;
             case "Laborant Soyadı":
                 model.addAttribute("indicator", "1");
-                model.addAttribute("laborant", laborantRepository.findAllBySurnameStartingWith(searchDto.getInputValue()));
-//                model.addAttribute("reports",laborantRepository.findAllBySurnameStartingWith(searchDto.getInputValue()));
+                model.addAttribute("reports", reportRepository.findAllByLaborant_SurnameStartingWithIgnoreCase(searchDto.getInputValue()));
                 break;
             default:
 //                model.addAttribute("laborants",laborantRepository.findAll());
@@ -77,7 +73,7 @@ public class LaborantController {
     public String SignUpGetMethod(Model model) {
         model.addAttribute("laborant", new Laborant());
         for (Laborant laborant : laborantRepository.findAll()) {
-            if(laborant.getIs_admin() == "1"){
+            if(laborant.getIs_admin().equals("1")){
                 model.addAttribute("is_admin","1");
                 return "sign-up";
             }

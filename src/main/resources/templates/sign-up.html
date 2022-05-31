@@ -51,11 +51,11 @@
                             <input id="password" class="form-control" type="password" th:field="${laborant.password}"
                                    required/>
                         </div>
-                        <div th:if="${is_admin == '0'}">
+                        <div class="form-group mt-2" th:if="${is_admin == '0'}">
+                            <label for="selectField">Yönetici Yetkileri</label>
                             <select class="form-control" id="selectField" name="selectField"
                                     th:field="${laborant.is_admin}"
                                     required>
-                                <option value="" selected>Yönetici Yetkileri</option>
                                 <option value="1">Evet</option>
                                 <option value="0">Hayır</option>
                             </select>

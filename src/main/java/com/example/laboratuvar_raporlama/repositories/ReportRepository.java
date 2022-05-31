@@ -8,6 +8,10 @@ import java.util.List;
 
 public interface ReportRepository extends JpaRepository<Report, Long> {
     List<Report> findAllByPatientNameStartingWithIgnoreCase(String patientName);
-    List<Report> findAllByPatientSurnameStartingWith(String patientSurname);
-    List<Report> findAllByTrIdentityNumberStartingWith(Long trIdentityNumber);
+    List<Report> findAllByPatientSurnameStartingWithIgnoreCase(String patientSurname);
+    List<Report> findAllByLaborant_NameStartingWithIgnoreCase(String name);
+    List<Report> findAllByLaborant_SurnameStartingWithIgnoreCase(String surname);
+
+    Report findByTrIdentityNumber(Long trIdentityNumber);
+
 }
