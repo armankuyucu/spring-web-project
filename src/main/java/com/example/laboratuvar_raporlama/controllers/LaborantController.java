@@ -23,16 +23,16 @@ public class LaborantController {
         this.reportRepository = reportRepository;
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public String IndexGetMethod(Model model) {
         List<Report> reports = reportRepository.findAll();
         model.addAttribute("reports", reports);
         model.addAttribute("report", new Report());
         model.addAttribute("searchDto", new SearchDto());
-        return "index";
+        return "/index";
     }
 
-    @PostMapping("")
+    @PostMapping("/")
     public String IndexPostMethod(Model model, Report report, SearchDto searchDto) {
         System.out.println("selectValue: " + searchDto.getSelectValue() + " ad: " + report.getPatientName() +
                 " soyad: " + report.getPatientSurname() + " id: " + report.getTrIdentityNumber());
@@ -66,10 +66,10 @@ public class LaborantController {
 //                model.addAttribute("laborants",laborantRepository.findAll());
                 model.addAttribute("reports", reportRepository.findAll());
         }
-        return "results";
+        return "/results";
     }
 
-    @GetMapping("sign-up")
+    @GetMapping("/sign-up")
     public String SignUpGetMethod(Model model) {
         model.addAttribute("laborant", new Laborant());
         for (Laborant laborant : laborantRepository.findAll()) {
@@ -79,7 +79,7 @@ public class LaborantController {
             }
         }
         model.addAttribute("is_admin","0");
-        return "sign-up";
+        return "/sign-up";
     }
 
     @PostMapping("sign-up")

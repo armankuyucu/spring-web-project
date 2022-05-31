@@ -1,5 +1,7 @@
 package com.example.laboratuvar_raporlama.domain;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -21,7 +23,8 @@ public class Report {
     @Lob
     @Column(columnDefinition="clob")
     private String picture;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "laborant_id", referencedColumnName = "primaryKey")
     private Laborant laborant;
     public Report(){
@@ -102,17 +105,17 @@ public class Report {
         this.picture = picture;
     }
 
-    public Laborant getLaborant() {
-        return laborant;
-    }
-
-    public void setLaborant(Laborant laborant) {
-        this.laborant = laborant;
-    }
-
-    public void assignLaborant(Laborant laborant) {
-        this.laborant = laborant;
-    }
+//    public Laborant getLaborant() {
+//        return laborant;
+//    }
+//
+//    public void setLaborant(Laborant laborant) {
+//        this.laborant = laborant;
+//    }
+//
+//    public void assignLaborant(Laborant laborant) {
+//        this.laborant = laborant;
+//    }
 
     public Long getPrimaryKey() {
         return primaryKey;

@@ -9,7 +9,8 @@ import java.util.Set;
 @Entity
 @Table(name = "laborant")
 public class Laborant {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long primaryKey;
     // Hastane Kimlik Numarası
     private String id;
@@ -18,7 +19,7 @@ public class Laborant {
 
     private String is_admin = "0";
     private String surname;
-//    @OneToMany(targetEntity = Report.class, cascade = CascadeType.ALL)
+    //    @OneToMany(targetEntity = Report.class, cascade = CascadeType.ALL)
 //    @JoinColumn(name = "laborant_report_fk", referencedColumnName = "primaryKey")
     @OneToMany(mappedBy = "laborant")
     @JsonIgnore
