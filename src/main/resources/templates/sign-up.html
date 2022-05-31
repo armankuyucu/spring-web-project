@@ -24,34 +24,49 @@
 </head>
 <body>
 <div class="container">
-    <div class="card">
-        <div class="card-header">
-            <i class="fa fa-user">Kayıt Ol</i>
+    <div style="width:800px;margin-left: auto;margin-right: auto;margin-top:24px;padding: 24px;">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title"><b>Kayıt Ol</b></h5>
+            </div>
+            <div class="card-block" style="padding: 24px;">
+                <form method="post" action="/sign-up" class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group mt-2">
+                            <label for="laborantId">Hastane Kimlik Numarası</label>
+                            <input id="laborantId" class="form-control" type="text" th:field="${laborant.id}" required/>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="laborantName">Laborant Adı</label>
+                            <input id="laborantName" class="form-control" type="text" th:field="${laborant.name}"
+                                   required/>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="laborantSurname">Laborant Soyadı</label>
+                            <input id="laborantSurname" class="form-control" type="text" th:field="${laborant.surname}"
+                                   required/>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="password">Şifre</label>
+                            <input id="password" class="form-control" type="password" th:field="${laborant.password}"
+                                   required/>
+                        </div>
+                        <div th:if="${is_admin == '0'}">
+                            <select class="form-control" id="selectField" name="selectField"
+                                    th:field="${laborant.is_admin}"
+                                    required>
+                                <option value="" selected>Yönetici Yetkileri</option>
+                                <option value="1">Evet</option>
+                                <option value="0">Hayır</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-md col-md-auto mt-3">Kaydol</button>
+                    </fieldset>
+                </form>
+            </div>
         </div>
-        <div class="card-block" style="padding: 24px;">
-            <form method="post" action="/sign-up" class="form-horizontal">
-                <fieldset>
-                    <div class="row mt-3">
-                        <label for="laborantId" class="col-md-2">Hastane Kimlik Numarası</label>
-                        <input id="laborantId" class="form-control" type="text" th:field="${laborant.id}" required/>
-                    </div>
-                    <div class="row mt-5">
-                        <label for="laborantName" class="col-md-2">Laborant Adı</label>
-                        <input id="laborantName" class="form-control" type="text" th:field="${laborant.name}" required/>
-                    </div>
-                    <div class="row mt-5">
-                        <label for="laborantSurname" class="col-md-2">Laborant Soyadı</label>
-                        <input id="laborantSurname" class="form-control" type="text" th:field="${laborant.surname}"
-                               required/>
-                    </div>
-                    <div class="row mt-5">
-                        <label for="password" class="col-md-2">Şifre</label>
-                        <input id="password" class="form-control" type="password" th:field="${laborant.password}" required/>
-                    </div>
-                    <button type="submit" class="btn btn-success btn-md col-md-auto mt-5">Kaydol</button>
-                </fieldset>
-            </form>
-        </div>
+
     </div>
 </div>
 

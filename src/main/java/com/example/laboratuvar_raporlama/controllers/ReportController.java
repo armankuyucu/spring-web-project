@@ -22,15 +22,17 @@ public class ReportController {
     private final ReportRepository reportRepository;
     private final LaborantRepository laborantRepository;
     private final ReportService reportService;
-    public ReportController(ReportRepository reportRepository, LaborantRepository laborantRepository, ReportService reportService){
+
+    public ReportController(ReportRepository reportRepository, LaborantRepository laborantRepository, ReportService reportService) {
         this.reportRepository = reportRepository;
         this.laborantRepository = laborantRepository;
         this.reportService = reportService;
     }
+
     @GetMapping("add-report")
-    public String addReportGetController(Model model){
+    public String addReportGetController(Model model) {
         model.addAttribute("reports", reportRepository.findAll());
-        model.addAttribute("report",new Report());
+        model.addAttribute("report", new Report());
         return "add-report";
     }
 
@@ -39,7 +41,7 @@ public class ReportController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
+            username = ((UserDetails) principal).getUsername();
         } else {
             username = principal.toString();
         }
@@ -60,21 +62,38 @@ public class ReportController {
     }
 
     @GetMapping("/picture/")
-    public String getPicture(@RequestParam("picture_id") Long picture_id, Model model){
+    public String getPicture(@RequestParam("picture_id") Long picture_id, Model model) {
         Optional<Report> report = reportRepository.findById(picture_id);
-        if(report.isPresent())
+        if (report.isPresent())
             model.addAttribute("report", report.get());
         else
             System.out.println("EMPTY!!!!!!!!!!!");
         return "picture";
     }
-//    @RequestMapping(value = "/image/{image_id}", produces = MediaType.IMAGE_PNG_VALUE)
-//    public ResponseEntity<byte[]> getImage(@PathVariable("image_id") Long imageId) throws IOException {
-//
-//        byte[] imageContent = reportRepository.getPictureByFileNumber(imageId).getPicture();//get image from DAO based on id
-//        final HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.IMAGE_PNG);
-//        return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
-//    }
 
+    @GetMapping("/delete/")
+    public String deleteReport(@RequestParam("id") Long id, Model model) {
+        // Get currently logged in user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        Laborant laborant = laborantRepository.findById(username);
+
+        Report report = reportRepository.getById(id);
+        if (laborant.getIs_admin().equals("1")) {
+            reportRepository.deleteById(id);
+            model.addAttribute("result", "1");
+            return "redirect:/";
+        } else {
+            System.out.println("IS ADMIN: " + report.getLaborant().getIs_admin());
+            System.out.println("ID: " + report.getLaborant().getId());
+
+            model.addAttribute("result", "0");
+            return "redirect:/";
+        }
+    }
 }

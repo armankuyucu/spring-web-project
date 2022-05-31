@@ -33,13 +33,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated() // (4)
                 .and()
                 .formLogin().loginPage("/login") // (5)
-//                .loginPage("/login") // (5)
                 .permitAll()
                 .and()
                 .logout() // (6)
                 .permitAll();
-//                .and()
-//                .httpBasic(); // (7)
         httpSecurity.csrf().disable();
     }
 

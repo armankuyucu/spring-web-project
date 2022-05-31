@@ -6,15 +6,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/add-report" class="nav-link px-3 link-primary">Rapor Ekle</a></li>
-            </ul>
-
-        </header>
-    </div>
+    <header class="p-3 mb-3 border-bottom">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-1 justify-content-center mb-md-0">
+                    <li><a href="/" class="nav-link px-4 mt-2 text-success" style="font-size: 18px;font-weight:bold;">Ana Sayfa</a></li>
+                    <li><a href="/add-report" class="nav-link px-4 mt-2 text-success" style="font-size: 18px;font-weight:bold;">Rapor Ekle</a></li>
+                </ul>
+                <div class="text-end">
+                    <button type="button" class="btn btn-success mx-4" onclick="window.location.href='/sign-up';">Kayıt Ol</button>
+                    <button type="button" class="btn btn-danger me-4" onclick="window.location.href='/logout';">Çıkış Yap</button>
+                </div>
+            </div>
+        </div>
+    </header>
     <script src="https://code.jquery.com/jquery-3.6.0.js"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script type="text/javascript" charSet="utf8"
@@ -27,12 +32,7 @@
 <div class="container">
 
     <form class="form-horizontal" action="" method="post">
-
-        <div class="form-group my-1">
-            <!--            <div class="row">-->
-            <!--                <div class="col-4 col"></div>-->
-            <!--                <div class="col-4 col"><p><b>Arama Kriteri</b></p></div>-->
-            <!--            </div>-->
+        <div class="form-group my-4">
             <div class="row">
                 <div class="col-4 col">
                     <input class="form-control" type="text" th:field="${searchDto.inputValue}">
@@ -56,14 +56,16 @@
                 </div>
 
             </div>
-        </div>
+        </div>-
     </form>
 
-    <h2 class="my-5">Tüm Raporlar</h2>
+    <h2 class="my-4">Tüm Raporlar</h2>
 
     <table id="reportTable" class="table table-striped table-bordered table-responsive">
         <thead>
         <tr>
+            <th scope="col">Laborant Adı</th>
+            <th scope="col">Laborant Soyadı</th>
             <th scope="col"> Dosya Numarası</th>
             <th scope="col"> Hasta Adı</th>
             <th scope="col"> Hasta Soyadı</th>
@@ -72,10 +74,15 @@
             <th scope="col"> Tanı Detayları</th>
             <th scope="col"> Tarih</th>
             <th scope="col"> Resim</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+
         </tr>
         </thead>
         <tbody>
         <tr th:each="report : ${reports}">
+            <td th:text="${report.laborant.name}"></td>
+            <td th:text="${report.laborant.surname}"></td>
             <td th:text="${report.fileNumber}"></td>
             <td th:text="${report.patientName}"></td>
             <td th:text="${report.patientSurname}"></td>
@@ -85,6 +92,8 @@
             <td th:text="${report.date}"></td>
             <th scope="row"><a th:href="@{/picture/(picture_id=${report.fileNumber})}"><img alt="Rapor Resmi" th:src="*{'data:image/*;base64,'+{report.picture}}"
                                      style="width: 100px;height: 100px;"></a></th>
+            <th scope="row"><a th:href="@{/update/(id=${report.fileNumber})}">Raporu Güncelle</a></th>
+            <th scope="row"><a th:href="@{/delete/(id=${report.fileNumber})}">Raporu Sil</a></th>
         </tr>
         </tbody>
     </table>
@@ -95,6 +104,13 @@
             "dom": '<"top"l>rt<"bottom"ip><"clear">',
         });
     });
+    // document.getElementById("deleteButton").onclick = function (){
+    //     alert("Clicked!");
+    // };
+    document.getElementById("deleteButton").onclick = function (){
+        alert("clicked");
+    };
+
 </script>
 </body>
 
