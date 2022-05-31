@@ -30,14 +30,14 @@ public class ReportController {
         this.reportService = reportService;
     }
 
-    @GetMapping("add-report")
+    @GetMapping("/add-report")
     public String addReportGetController(Model model) {
         model.addAttribute("reports", reportRepository.findAll());
         model.addAttribute("report", new Report());
         return "add-report";
     }
 
-    @PostMapping("add-report")
+    @PostMapping("/add-report")
     public String addReportPostController(Report report, @RequestParam("file") MultipartFile file) throws IOException {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
@@ -59,7 +59,7 @@ public class ReportController {
             model.addAttribute("report", report.get());
         else
             System.out.println("EMPTY!");
-        return "/picture";
+        return "picture";
     }
 
     @GetMapping("/delete/")
@@ -84,13 +84,13 @@ public class ReportController {
         }
     }
 
-    @GetMapping("/update")
+    @GetMapping("/update/")
     public String updateReportGet(@RequestParam("id") Long fileNumber, Model model) {
         model.addAttribute("report", reportRepository.getById(fileNumber));
-        return "/update";
+        return "update";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/update/")
     public String updateReportPost(Report report, @RequestParam("indicator") String indicator,
                                    @RequestParam("id") Long primaryKey) {
         if (indicator.equals("fileNumber")) {

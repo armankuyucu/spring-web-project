@@ -29,7 +29,7 @@ public class LaborantController {
         model.addAttribute("reports", reports);
         model.addAttribute("report", new Report());
         model.addAttribute("searchDto", new SearchDto());
-        return "/index";
+        return "index";
     }
 
     @PostMapping("/")
@@ -66,7 +66,7 @@ public class LaborantController {
 //                model.addAttribute("laborants",laborantRepository.findAll());
                 model.addAttribute("reports", reportRepository.findAll());
         }
-        return "/results";
+        return "results";
     }
 
     @GetMapping("/sign-up")
@@ -79,10 +79,10 @@ public class LaborantController {
             }
         }
         model.addAttribute("is_admin","0");
-        return "/sign-up";
+        return "sign-up";
     }
 
-    @PostMapping("sign-up")
+    @PostMapping("/sign-up")
     public String SignUpPostMethod(Laborant laborant) {
         laborant.setPassword(new BCryptPasswordEncoder().encode(laborant.getPassword()));
         laborantRepository.save(laborant);
