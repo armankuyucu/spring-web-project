@@ -19,13 +19,6 @@ public class ReportService {
     }
 
     public void saveReportToDB(MultipartFile file, Report report) throws IOException {
-//        report.setFileNumber(fileNumber);
-//        report.setPatientName(patientName);
-//        report.setPatientSurname(patientSurname);
-//        report.setTrIdentityNumber(trIdentityNumber);
-//        report.setTitle(title);
-//        report.setDetails(details);
-//        report.setDate(date);
         report.setPicture(Base64.getEncoder().encodeToString(file.getBytes()));
         reportRepository.save(report);
         System.out.println("GİRDİ!!!!");

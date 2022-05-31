@@ -87,7 +87,7 @@ public class ReportController {
     @GetMapping("/update")
     public String updateReportGet(@RequestParam("id") Long fileNumber, Model model){
         model.addAttribute("report", reportRepository.getById(fileNumber));
-        return "/update";
+        return "update";
     }
 
     @PostMapping("/update")
