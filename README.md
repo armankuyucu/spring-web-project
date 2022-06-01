@@ -1,2 +1,2 @@
 # **Uygulamanın Çalıştırılması**
-Uygulama çalıştırılabilir jar dosyasıdır. Jar dosyası Java 11 ve üzeri yüklü olan her bilgisayarda çalışmaktadır. Uygulamayı Jar dosyasının bulunduğu klasörde iken terminalden  "java -jar laboratuvar_raporlama.jar" komutu ile çalıştırabilirsiniz.
+Pom.xml dosyasının bulunduğu klasörde iken mvn compile komutu ile uygulama uygulama derlenir, mvn package komutu ile jar paketi oluşturulur. Jar dosyası target klasörünün içinde olacaktır. Terminalde cd komutu ile bu klasöre geldiğinizde java -jar laboratuvar_raporlama-0.0.1-SNAPSHOT.jar komutu ile uygulamayı çalıştırabilirsiniz. Uygulama çalıştıktan sonra localhost:8080 adresine giderek web sayfasına ulaşabilirsiniz.
